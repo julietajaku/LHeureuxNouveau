@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  semaine: 2014-06-27
+  coute: 1.5
+
+two:
+  semaine: 2014-06-27
+  coute: 1.5
