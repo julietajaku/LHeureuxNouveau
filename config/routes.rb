@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  get 'site/index'
+
   devise_for :users
   resources :paniers
 
-  root 'paniers#index'
+  root 'site#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

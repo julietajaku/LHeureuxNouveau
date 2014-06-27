@@ -40,3 +40,9 @@ gem 'spring',        group: :development
 
 # Devise user authentication
 gem 'devise', '~> 3.0.0.rc'
+
+# Zurb for CSS layouts help
+gem 'zurb-foundation', '~> 4.2.2'
+
+# Prettier forms
+gem 'simple_form', '~> 3.0.0.rc'

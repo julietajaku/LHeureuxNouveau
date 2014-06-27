@@ -1,0 +1,40 @@
+<h1>Welcome to Panier Recette by L'Heureux Nouveau</h1>
+<% if current_user %>
+  <h2>Histoire des paniers</h2>
+  <table style="width: 100%">
+    <thead>
+      <tr>
+        <th>Semaine</th>
+        <th>Coute</th>
+      </tr>
+    </thead>
+ 
+    <tbody>
+      <% @paniers.each do |panier| %>
+        <tr>
+          <td><%= panier.semaine %></td>
+          <td><%= panier.coute %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+ 
+<% else %>
+  <div class="panel">
+    <h1>Order your panier recette!</h1>
+    <%= link_to "Get started today", new_user_registration_path, :class => "button button-large" %>
+  </div>
+ 
+  <hr>
+ 
+  <div class="row">
+    <div class="large-8 columns">
+      <h3>12 Devs of Summer</h3>
+      <p><a class="" href="http://12devs.co.uk" target="_blank">Learn more</a>.</p>
+    </div>
+    <div class="large-4 columns">
+      <h3>About this app</h3>
+      <p>This is a tutorial app developed by <a href="http://andreapavoni.com" target="_blank">Andrea Pavoni</a> as a companion to the rails article. Check the source code on <a href="http://github.com/apeacox/12dos-bookmarks" target="_blank">GitHub</a>. </p>
+    </div>
+  </div>
+<% end %>
