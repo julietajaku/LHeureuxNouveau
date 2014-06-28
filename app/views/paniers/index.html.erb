@@ -1,27 +1,24 @@
-<h1>Listing paniers</h1>
+<h3>Listing paniers</h3>
 
 <table>
   <thead>
     <tr>
       <th>Semaine</th>
       <th>Coute</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @paniers.each do |panier| %>
       <tr>
-        <td><%= panier.semaine %></td>
+        <td><%= link_to panier.semaine, edit_panier_path(panier) %></td>
         <td><%= panier.coute %></td>
-        <td><%= link_to 'Show', panier %></td>
-        <td><%= link_to 'Edit', edit_panier_path(panier) %></td>
-        <td><%= link_to 'Destroy', panier, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', panier, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<br><br>
 
-<%= link_to 'New Panier', new_panier_path %>
+<p><%= link_to 'New Panier', new_panier_path %></p>

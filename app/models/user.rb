@@ -5,5 +5,5 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :rememberable, :validatable
 
-  has_many :paniers
+  has_many :paniers, dependent: :destroy
 end
