@@ -1,7 +1,20 @@
 <% if current_user %>
-  <p><%= link_to "Mes paniers", paniers_path %></p>
-  <p><%= link_to "Ajouter un panier", new_panier_path %></p>
- 
+  <p><%= link_to "My panniers", paniers_path %></p>
+  <p><%= link_to "Create pannier", new_panier_path %></p>
+  <p><%= link_to "Add a recipe", new_recipe_path %></p>
+
+  <h4>Recipes this week</h4>
+  <table>
+	<tbody>
+    	<% @recipes.each do |recipe| %>
+      		<tr>
+        		<td><%= link_to recipe.title, recipe %></td>
+				<td><%= recipe.short_desc %></td>     
+     	 	</tr>
+    	<% end %>
+  	</tbody>
+  </table>
+
 <% else %>
   <div class="panel">
     <h1>Order your panier recette!</h1>
