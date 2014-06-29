@@ -1,7 +1,9 @@
 <% if current_user %>
   <p><%= link_to "My panniers", paniers_path %></p>
   <p><%= link_to "Create pannier", new_panier_path %></p>
-  <p><%= link_to "Add a recipe", new_recipe_path %></p>
+  <% if current_user.try(:admin?) %>
+    <p><%= link_to "Add a recipe", new_recipe_path %></p>
+  <%end%>
 
   <h4>Recipes this week</h4>
   <table>
