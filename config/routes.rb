@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
   resources :recipes
-
-  get 'site/index'
-
-  devise_for :users
   resources :paniers
 
-  root 'site#index'
+  devise_for :users
+
+  root 'recipes#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
