@@ -5,6 +5,9 @@
           <tr>
             <td><%= link_to recipe.title, recipe %></td>
             <td><%= recipe.short_desc %></td>
+            <% if @panier %>              
+              <td><%= link_to "Add", add_to_panier_path(id: recipe.id) %></td>
+            <% end %>
         </tr>
       <% end %>
     </tbody>

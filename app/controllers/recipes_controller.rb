@@ -1,6 +1,11 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
+  before_filter :set_panier
+  def set_panier
+    @panier = current_user.paniers.last
+  end
+
   # GET /recipes
   # GET /recipes.json
   def index
@@ -25,7 +30,6 @@ class RecipesController < ApplicationController
   # POST /recipes.json
   def create
     @recipe = current_user.recipes.new(recipe_params)
-
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
@@ -61,6 +65,20 @@ class RecipesController < ApplicationController
     end
   end
 
+  def add_to_panier
+    params.require(:id)
+    @panier.recipes << Recipe.find(params[:id])
+    respond_to do |format|
+      if @panier.save
+        format.html { redirect_to @panier, notice: 'Recipe was successfully added.' }
+        format.json { render :show, status: :created, location: @panier }
+      else
+        format.html { render :new }
+        format.json { render json: @panier.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
@@ -69,6 +87,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:title, :instructions, :short_desc)
+      params.require(:recipe).permit(:title, :instructions, :short_desc, :panier_id)
     end
 end

@@ -9,4 +9,5 @@ class Panier < ActiveRecord::Base
 
 	# ensures a date is present
 	validates :week_id, presence: true
+
 end

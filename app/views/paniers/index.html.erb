@@ -13,13 +13,13 @@
       <tr>
         <td><%= link_to panier.week.start, edit_panier_path(panier) %></td>
         <td><%= panier.coute %></td>
-        <% if panier.recipes %>
-          <td><%= @recipes = panier.recipes %>
-            <% @recipes.each do |recipe| %>
-              <%= recipe.name %>
-            <% end %>
+          <td><% if @recipes = panier.recipes %>
+            <% if @recipes.each do |recipe| %>
+              <%= recipe.title %>
+            <% end.empty? %>
+              Panier is empty.
+            <% end %> 
         <% end %>
-        </td>
         <td><%= link_to 'Delete', panier, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
