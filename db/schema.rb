@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140629152531) do
+ActiveRecord::Schema.define(version: 20140703151634) do
 
   create_table "paniers", force: true do |t|
-    t.date     "semaine"
     t.float    "coute"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "user_id"
+    t.integer  "week_id"
   end
 
   create_table "paniers_recipes", id: false, force: true do |t|
@@ -47,5 +47,11 @@ ActiveRecord::Schema.define(version: 20140629152531) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+
+  create_table "weeks", force: true do |t|
+    t.date     "start"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

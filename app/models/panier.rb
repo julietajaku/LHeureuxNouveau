@@ -1,5 +1,6 @@
 class Panier < ActiveRecord::Base
 	belongs_to :user
+	belongs_to :week
 
 	has_and_belongs_to_many :recipes
 
@@ -7,5 +8,5 @@ class Panier < ActiveRecord::Base
 	validates :user_id, presence: true
 
 	# ensures a date is present
-	validates :semaine, presence: true
+	validates :week_id, presence: true
 end

@@ -26,6 +26,8 @@ class PaniersController < ApplicationController
   # POST /paniers.json
   def create
     @panier = current_user.paniers.new(panier_params)
+    @week = Week.find(panier_params[:week_id])
+    @week.paniers << @panier
 
     respond_to do |format|
       if @panier.save
@@ -73,6 +75,6 @@ class PaniersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def panier_params
-      params.require(:panier).permit(:semaine, :coute)
+      params.require(:panier).permit(:coute, :week_id, :user_id)
     end
 end
