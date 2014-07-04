@@ -1,0 +1,13 @@
+%h4 Recipes this week
+%table
+  %tbody
+    - @recipes.each do |recipe|
+      %tr
+        %td= link_to recipe.title, recipe
+        %td= recipe.short_desc
+        - if @panier
+          %td= link_to "Add", add_to_panier_path(id: recipe.id)
+%br/
+%br/
+- if current_user.try(:admin?)
+  = link_to "New recipe", new_recipe_path
