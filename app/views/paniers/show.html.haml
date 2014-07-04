@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Week:
+  = @panier.week.start
+%p
+  %strong Coute:
+  = @panier.coute
+= link_to 'Edit', edit_panier_path(@panier)
+|
+\#{link_to 'Back', paniers_path}

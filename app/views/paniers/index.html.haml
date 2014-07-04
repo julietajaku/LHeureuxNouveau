@@ -1,0 +1,19 @@
+%h3 Listing paniers
+%table
+  %thead
+    %tr
+      %th Semaine
+      %th Coute
+  %tbody
+    - @paniers.each do |panier|
+      %tr
+        %td= link_to panier.week.start, edit_panier_path(panier)
+        %td= panier.coute
+        %td
+          - if @recipes = panier.recipes
+            - @recipes.each do |recipe|
+              = recipe.title
+        %td= link_to 'Delete', panier, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+%br/
+%p= link_to 'New Panier', new_panier_path

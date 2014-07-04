@@ -1,0 +1,14 @@
+- if current_user.try(:admin?)
+  %h1 Listing recipes
+  %table
+    %thead
+      %tr
+    %tbody
+      - @recipes.each do |recipe|
+        %tr
+          %td= link_to recipe.title, recipe
+          %td= recipe.short_desc
+          %td= link_to 'Edit', edit_recipe_path(recipe)
+          %td= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New recipe', new_recipe_path
