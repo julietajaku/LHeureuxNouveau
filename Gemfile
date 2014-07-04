@@ -46,3 +46,7 @@ gem 'zurb-foundation', '~> 4.2.2'
 
 # Prettier forms
 gem 'simple_form', '~> 3.0.0.rc'
+
+# HAML
+gem 'haml'
+gem 'haml-rails', '>= 0.3.4', :group => :development
