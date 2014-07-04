@@ -11,15 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140703151634) do
+ActiveRecord::Schema.define(version: 20140704103614) do
 
-  create_table "paniers", force: true do |t|
-    t.float    "coute"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "user_id"
-    t.integer  "week_id"
-  end
+# Could not dump table "ingredients" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
+
+# Could not dump table "paniers" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "paniers_recipes", id: false, force: true do |t|
     t.integer "panier_id"
@@ -27,6 +25,15 @@ ActiveRecord::Schema.define(version: 20140703151634) do
   end
 
   add_index "paniers_recipes", ["panier_id", "recipe_id"], name: "index_paniers_recipes_on_panier_id_and_recipe_id"
+
+  create_table "products", force: true do |t|
+    t.string   "name"
+    t.boolean  "par_kilo"
+    t.float    "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "available"
+  end
 
   create_table "recipes", force: true do |t|
     t.string   "title"

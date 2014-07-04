@@ -12,3 +12,8 @@
       <% end %>
     </tbody>
   </table>
+
+<br><br>
+<% if current_user.try(:admin?) %> 
+  <%= link_to "New recipe", new_recipe_path %>
+<% end %>

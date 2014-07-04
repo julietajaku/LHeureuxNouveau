@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'admin/show'
+
+  resources :products
+
   resources :weeks
 
   resources :recipes

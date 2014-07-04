@@ -15,7 +15,7 @@
     <%= link_to 'HOME', recipes_path %> 
     ||
     <% if current_user.try(:admin?) %>
-      <%= link_to "Admin page TBA", new_recipe_path %>
+      <%= link_to "Admin", admin_show_path %>
     <%end%>
     ||
     <% if user_signed_in? %>
