@@ -9,6 +9,9 @@
           %td= product.name
         - if @panier
           %td= link_to "Add", add_to_panier_path(id: recipe.id)
+        - if current_user.try(:admin?)
+          %td= link_to 'X', recipe, method: :delete, data: { confirm: 'Are you sure?' }
+
 %br/
 %br/
 - if current_user.try(:admin?)
