@@ -5,6 +5,8 @@
       %tr
         %td= link_to recipe.title, recipe
         %td= recipe.short_desc
+        - recipe.products.each do |product|
+          %td= product.name
         - if @panier
           %td= link_to "Add", add_to_panier_path(id: recipe.id)
 %br/

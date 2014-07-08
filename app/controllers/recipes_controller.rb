@@ -20,6 +20,7 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   def new
     @recipe = current_user.recipes.new
+    @recipe.ingredients.build
     3.times {@recipe.ingredients.build}
   end
 
@@ -31,9 +32,17 @@ class RecipesController < ApplicationController
   # POST /recipes.json
   def create
     @recipe = current_user.recipes.new(recipe_params)
+
+    # ingredients
+    params[:recipe][:ingredients_attributes].values.each do |ingredient_params|
+      @recipe.ingredients << Ingredient.new(:recipe_id => @recipe.id, 
+                                    :product_id => ingredient_params[:product_id], 
+                                    :quantity => ingredient_params[:quantity])
+    end
+
     respond_to do |format|
       if @recipe.save
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
+        format.html { redirect_to @recipe, notice: 'Recipe was successfully created.'}
         format.json { render :show, status: :created, location: @recipe }
       else
         format.html { render :new }
