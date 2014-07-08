@@ -4,10 +4,5 @@
     = f.input :title
     = f.input :short_desc
     = f.input :instructions
-
-    = f.simple_fields_for :ingredients do |ingredient_form|
-      = render 'ingredient_fields', :f => ingredient_form
-      %br
-    
   .form-actions
     = f.button :submit
