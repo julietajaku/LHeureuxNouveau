@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   include ApplicationHelper
   
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :toggle_available]
   before_filter :verify_is_admin
 
   # GET /products
@@ -49,6 +49,19 @@ class ProductsController < ApplicationController
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def toggle_available
+    @product.toggle(:available)
+    respond_to do |format|
+      if @product.save
+        format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
+        format.json { render :products_url, status: :ok}
+      else
+        format.html { render :index }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end

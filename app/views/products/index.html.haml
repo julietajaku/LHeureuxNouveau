@@ -3,7 +3,7 @@
   %thead
     %tr
       %th Name
-      %th Par kilo
+      %th Par-kilo
       %th Price
       %th{:colspan => "3"}
   %tbody
@@ -12,7 +12,10 @@
         %td= product.name
         %td= product.par_kilo
         %td= product.price
-        %td= link_to 'Show', product
+        - if product.available 
+          %td= link_to "o" , toggle_available_product_path(product)
+        - else 
+          %td= link_to "+" , toggle_available_product_path(product)
         %td= link_to 'Edit', edit_product_path(product)
         %td= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }
 %br/

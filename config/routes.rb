@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   get 'admin/show'
 
-  resources :products
+  resources :products do
+    get :toggle_available, :on => :member
+  end
 
   resources :weeks
 
-  resources :recipes
+  resources :recipes 
+
   resources :paniers
 
   devise_for :users
