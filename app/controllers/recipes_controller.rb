@@ -20,6 +20,7 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   def new
     @recipe = current_user.recipes.new
+    3.times {@recipe.ingredients.build}
   end
 
   # GET /recipes/1/edit
@@ -87,6 +88,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:title, :instructions, :short_desc, :panier_id)
+      params.require(:recipe).permit(:title, :instructions, :short_desc, :panier_id, :ingredients_attributes)
     end
 end
