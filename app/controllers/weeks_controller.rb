@@ -1,5 +1,6 @@
 class WeeksController < ApplicationController
   before_action :set_week, only: [:show, :edit, :update, :destroy]
+  before_filter :verify_is_admin
 
   # GET /weeks
   # GET /weeks.json

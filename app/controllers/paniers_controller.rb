@@ -1,6 +1,8 @@
 class PaniersController < ApplicationController
-  before_action :set_panier, only: [:show, :edit, :update, :destroy]
+  include ApplicationHelper
+
   before_action :authenticate_user!
+  before_action :set_panier, only: [:show, :edit, :update, :destroy]
 
   # GET /paniers
   # GET /paniers.json
@@ -65,13 +67,6 @@ class PaniersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_panier
-      unless @panier = current_user.paniers.where(params[:id]).first
-        flash[:alert] = 'Panier requested not found.'
-        redirect_to root_url
-      end
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def panier_params

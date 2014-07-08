@@ -1,10 +1,10 @@
 class RecipesController < ApplicationController
+  include ApplicationHelper
+
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  before_filter :verify_is_admin, only: [:create, :edit, :update, :destroy]
 
   before_filter :set_panier
-  def set_panier
-    @panier = current_user.paniers.last
-  end
 
   # GET /recipes
   # GET /recipes.json
@@ -90,4 +90,5 @@ class RecipesController < ApplicationController
     def recipe_params
       params.require(:recipe).permit(:title, :instructions, :short_desc, :panier_id, :ingredients_attributes)
     end
+
 end
