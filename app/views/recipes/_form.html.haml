@@ -1,8 +1,15 @@
-= simple_form_for(@recipe) do |f|
-  = f.error_notification
+= simple_nested_form_for @recipe do |f|
   .form-inputs
     = f.input :title
     = f.input :short_desc
     = f.input :instructions
+
+    #ingredients 
+      = f.fields_for :ingredients do |i| 
+        = render 'ingredient_fields', :f => i
+    = f.link_to_add "Add ingredient", :ingredients, :data => { :target => "#ingredients" }
+
+
   .form-actions
     = f.button :submit
+
