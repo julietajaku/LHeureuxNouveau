@@ -39,6 +39,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    consistency_fail (0.3.2)
     devise (3.0.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -138,6 +139,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
+  consistency_fail
   devise (~> 3.0.0.rc)
   haml
   haml-rails (>= 0.3.4)

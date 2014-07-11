@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140710182128) do
+ActiveRecord::Schema.define(version: 20140711115843) do
+
+  create_table "ingredients", force: true do |t|
+    t.integer  "product_id"
+    t.integer  "recipe_id"
+    t.float    "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ingredients", ["product_id", "recipe_id"], name: "index_ingredients_on_product_id_and_recipe_id", unique: true
 
   create_table "paniers", force: true do |t|
-    t.date     "semaine"
     t.float    "coute"
     t.integer  "user_id"
     t.integer  "week_id"
@@ -22,13 +31,15 @@ ActiveRecord::Schema.define(version: 20140710182128) do
     t.datetime "updated_at"
   end
 
+  add_index "paniers", ["user_id", "week_id"], name: "index_paniers_on_user_id_and_week_id", unique: true
+
   create_table "paniers_recipes", id: false, force: true do |t|
     t.integer "panier_id",             null: false
     t.integer "recipe_id",             null: false
     t.integer "size",      default: 2, null: false
   end
 
-  add_index "paniers_recipes", ["panier_id", "recipe_id"], name: "index_paniers_recipes_on_panier_id_and_recipe_id"
+  add_index "paniers_recipes", ["panier_id", "recipe_id"], name: "index_paniers_recipes_on_panier_id_and_recipe_id", unique: true
 
   create_table "products", force: true do |t|
     t.string   "name",                       null: false
@@ -38,14 +49,6 @@ ActiveRecord::Schema.define(version: 20140710182128) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "products_recipes", id: false, force: true do |t|
-    t.integer "product_id", null: false
-    t.integer "recipe_id",  null: false
-    t.float   "quantity",   null: false
-  end
-
-  add_index "products_recipes", ["product_id", "recipe_id"], name: "index_products_recipes_on_product_id_and_recipe_id"
 
   create_table "recipes", force: true do |t|
     t.string   "title",        null: false

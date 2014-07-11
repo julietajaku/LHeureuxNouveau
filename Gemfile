@@ -52,3 +52,6 @@ gem 'nested_form'
 # HAML
 gem 'haml'
 gem 'haml-rails', '>= 0.3.4', :group => :development
+
+# Identify missing unique indexes
+gem 'consistency_fail'

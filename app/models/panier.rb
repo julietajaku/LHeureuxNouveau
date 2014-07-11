@@ -5,9 +5,10 @@ class Panier < ActiveRecord::Base
 	has_and_belongs_to_many :recipes
 
 	# ensure that a user_id is present
-	validates :user_id, presence: true
+	validates_presence_of :user
 
 	# ensures a date is present
-	validates :week_id, presence: true
+	validates_presence_of :week
 
+	validates :week, uniqueness: {scope: :user_id}, presence: true
 end
