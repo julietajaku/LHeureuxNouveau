@@ -6,6 +6,5 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :rememberable, :validatable
 
-  has_many :paniers, dependent: :destroy
-  has_many :recipes
+  has_many :paniers, :autosave => true, dependent: :destroy
 end

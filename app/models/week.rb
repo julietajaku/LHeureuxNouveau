@@ -1,3 +1,3 @@
 class Week < ActiveRecord::Base
-	has_many :paniers
+	has_many :paniers, :autosave => true
 end
