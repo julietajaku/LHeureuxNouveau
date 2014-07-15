@@ -1,10 +1,13 @@
 class RecipesController < ApplicationController
-  include ApplicationHelper
+  include ApplicationHelper, RecipesHelper
 
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
   before_filter :verify_is_admin, only: [:create, :edit, :update, :destroy]
 
   before_filter :set_panier
+
+  before_action :remove_empty_quantity, only: [:create, :update]
+  before_action :remove_duplicate_products, only: [:create, :update]
 
   # GET /recipes
   # GET /recipes.json
@@ -29,9 +32,9 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.json
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe = Recipe.new(@filtered_params)
     respond_to do |format|
-      if @recipe.save
+      if @recipe.save!
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.'}
         format.json { render :show, status: :created, location: @recipe }
       else
@@ -45,7 +48,7 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1.json
   def update
     respond_to do |format|
-      if @recipe.update(recipe_params)
+      if @recipe.update!(@filtered_params)
         format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe }
       else
@@ -87,7 +90,7 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:title, :instructions, :short_desc, :panier_id, :ingredients_attributes => [:product_id, :quantity])
+      params.require(:recipe).permit(:id, :title, :instructions, :short_desc, :panier_id, :ingredients_attributes => [:product_id, :quantity, :_destroy])
     end
 
 end
