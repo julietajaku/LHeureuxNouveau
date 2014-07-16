@@ -13,9 +13,9 @@
         %td= product.par_kilo
         %td= product.price
         - if product.available 
-          %td= link_to "o" , toggle_available_product_path(product)
+          %td= link_to "Remove_from_week  " , toggle_available_product_path(product)
         - else 
-          %td= link_to "+" , toggle_available_product_path(product)
+          %td= link_to "Add_to_week  " , toggle_available_product_path(product)
         %td= link_to 'Edit', edit_product_path(product)
         %td= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }
 %br/

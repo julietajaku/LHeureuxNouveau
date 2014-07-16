@@ -16,3 +16,6 @@
 %br/
 - if current_user.try(:admin?)
   = link_to "New recipe", new_recipe_path
+
+- @recipes_missing_ingredients.each do |r|
+  = r.id
