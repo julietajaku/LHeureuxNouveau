@@ -1,10 +1,22 @@
 %p#notice= notice
-%p
-  %strong Week:
-  = @panier.week.start
-%p
-  %strong Coute:
-  = @panier.coute
+%h3 My Panier this week
+%table
+  %thead
+    %tr
+      %th Recipe
+      %th Description
+      %th Cost
+  %tbody
+    - @panier.recipes.each do |recipe|
+      %tr
+        %td = recipe.title
+        %td = recipe.short_desc
+        %td= link_to 'Delete', panier, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+%br/
+%p= link_to 'New Panier', new_panier_path
+
+
 = link_to 'Edit', edit_panier_path(@panier)
 |
 \#{link_to 'Back', paniers_path}
