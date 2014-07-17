@@ -35,5 +35,14 @@ module RecipesHelper
     @filtered_params[:ingredients_attributes] = @ingredients_include
   end
 
+  def calculate_cost(recipe)
+    @cost = 0
+    recipe.ingredients.each do |i|
+      @cost += i.quantity * i.product.price
+    end
+    return @cost
+  end
+
+
 
 end

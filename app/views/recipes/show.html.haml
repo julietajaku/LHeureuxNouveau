@@ -12,6 +12,10 @@
   %strong Ingredients:
   - @recipe.ingredients.each do |ingredient|
     = ingredient.product.name
+%p
+  %strong Cost:
+  = @cost
+
 
 = link_to 'Edit', edit_recipe_path(@recipe)
 |
