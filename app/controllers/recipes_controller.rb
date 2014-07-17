@@ -6,14 +6,17 @@ class RecipesController < ApplicationController
 
   before_filter :set_panier
 
-  before_action :find_recipes_this_week, only: [:index]
-
   before_action :remove_empty_quantity, only: [:create, :update]
   before_action :remove_duplicate_products, only: [:create, :update]
 
   # GET /recipes
   # GET /recipes.json
   def index
+    if params[:show_all] == 'true' && current_user.try(:admin?)
+      @recipes = Recipe.all
+    else
+      @recipes = find_recipes_this_week
+    end
     #@avail_recipes = Recipe.joins(:ingredients).joins(:ingredients => :products).first
     #logger.info "################# YALAAAA #{@ingredients.first.quantity}"
   end

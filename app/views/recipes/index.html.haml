@@ -16,3 +16,7 @@
 %br/
 - if current_user.try(:admin?)
   = link_to "New recipe", new_recipe_path
+- if params[:show_all] == 'true'
+  = link_to "Undo", url_for(params.merge(:show_all => false))
+-else 
+  = link_to "Show all", url_for(params.merge(:show_all => true))
