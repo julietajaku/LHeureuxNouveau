@@ -7,6 +7,7 @@
         %td= recipe.short_desc
         - recipe.products.each do |product|
           %td= product.name
+        %td= calculate_cost(recipe) 
         - if @panier
           %td= link_to "Add", add_to_panier_path(id: recipe.id)
         - if current_user.try(:admin?)
