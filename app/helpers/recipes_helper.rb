@@ -1,6 +1,21 @@
 module RecipesHelper
 	include ApplicationHelper
 
+  def find_recipes_this_week
+     @recipes_missing_ingredients = Recipe.find_by_sql ["SELECT recipes.id 
+     								FROM recipes 
+     								INNER JOIN ingredients 
+     								WHERE recipes.id = ingredients.recipe_id
+     								AND ingredients.id IN 
+     								(SELECT ingredients.id 
+     									 FROM products
+     									 INNER JOIN ingredients
+     									 WHERE products.id = ingredients.product_id
+     									 AND products.available = 'f')"]
+
+	@recipes = Recipe.all - Recipe.find(@recipes_missing_ingredients)
+  end
+  	
   def remove_empty_quantity
     if !@filtered_params
       @filtered_params = recipe_params
