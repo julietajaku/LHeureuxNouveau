@@ -9,9 +9,9 @@
   %tbody
     - @panier.recipes.each do |recipe|
       %tr
-        %td = recipe.title
-        %td = recipe.short_desc
-        %td = recipe_cost(recipe)
+        %td= recipe.title
+        %td= recipe.short_desc
+        %td= recipe_cost(recipe)
         %td= link_to 'Delete', @panier, method: :delete, data: { confirm: 'Are you sure?' }
 %br/
 %h4 Total Cost

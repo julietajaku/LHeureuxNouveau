@@ -7,8 +7,8 @@
   %tbody
     - @paniers.each do |panier|
       %tr
-        %td= link_to panier.week.start, edit_panier_path(panier)
-        %td= panier.coute
+        %td= link_to panier.week.start, panier_path(panier)
+        %td= panier_cost(panier)
         %td
           - if @recipes = panier.recipes
             - @recipes.each do |recipe|

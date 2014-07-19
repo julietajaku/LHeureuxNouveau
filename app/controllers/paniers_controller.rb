@@ -13,11 +13,6 @@ class PaniersController < ApplicationController
   # GET /paniers/1
   # GET /paniers/1.json
   def show
-    logger.info "#################### show"
-
-    @panier.recipes.each do |recipe|
-      logger.info "#################### #{recipe.name}"
-    end
   end
 
   # GET /paniers/new
