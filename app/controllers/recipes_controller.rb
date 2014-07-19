@@ -24,7 +24,6 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
-    @cost = calculate_cost(@recipe)
   end
 
   # GET /recipes/new
