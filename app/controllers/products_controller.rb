@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   include ApplicationHelper
   
   before_action :set_product, only: [:show, :edit, :update, :destroy, :toggle_available]
-  before_filter :verify_is_admin
+  before_action :verify_is_admin
 
   # GET /products
   # GET /products.json

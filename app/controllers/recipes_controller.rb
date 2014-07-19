@@ -1,10 +1,10 @@
 class RecipesController < ApplicationController
   include ApplicationHelper, RecipesHelper
 
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
-  before_filter :verify_is_admin, only: [:create, :edit, :update, :destroy]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :add_to_panier]
+  before_action :verify_is_admin, only: [:create, :edit, :update, :destroy]
 
-  before_filter :set_panier
+  before_action :set_panier
 
   before_action :remove_empty_quantity, only: [:create, :update]
   before_action :remove_duplicate_products, only: [:create, :update]
@@ -75,8 +75,8 @@ class RecipesController < ApplicationController
   end
 
   def add_to_panier
-    params.require(:id)
-    @panier.recipes << Recipe.find(params[:id])
+    #params.require(:id)
+    @panier.recipes << @recipe 
     respond_to do |format|
       if @panier.save
         format.html { redirect_to @panier, notice: 'Recipe was successfully added.' }

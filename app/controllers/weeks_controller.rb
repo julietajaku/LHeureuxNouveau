@@ -2,7 +2,7 @@ class WeeksController < ApplicationController
   include ApplicationHelper
 
   before_action :set_week, only: [:show, :edit, :update, :destroy]
-  before_filter :verify_is_admin
+  before_action :verify_is_admin
 
   # GET /weeks
   # GET /weeks.json
