@@ -9,7 +9,12 @@
           %td= product.name
         %td= recipe_cost(recipe) 
         - if @panier
-          %td= link_to "Add", add_to_panier_path(recipe)
+          - if @panier.recipes
+            - if @panier.recipes.exists?(recipe)
+              %td= link_to "Remove", remove_from_panier_recipe_path(recipe)
+            - else 
+              %td= link_to "Add", add_to_panier_recipe_path(recipe)
+
         - if current_user.try(:admin?)
           %td= link_to 'X', recipe, method: :delete, data: { confirm: 'Are you sure?' }
 

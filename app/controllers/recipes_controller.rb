@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
   include ApplicationHelper, RecipesHelper
 
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :add_to_panier]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :add_to_panier, :remove_from_panier]
   before_action :verify_is_admin, only: [:create, :edit, :update, :destroy]
 
   before_action :set_panier
@@ -12,6 +12,8 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.json
   def index
+    logger.info "################  INDEX"
+
     if params[:show_all] == 'true' && current_user.try(:admin?)
       @recipes = Recipe.all
     else
@@ -24,6 +26,8 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
+    logger.info "################  SHOW RECIPE"
+
   end
 
   # GET /recipes/new
@@ -75,15 +79,25 @@ class RecipesController < ApplicationController
   end
 
   def add_to_panier
-    #params.require(:id)
-    @panier.recipes << @recipe 
     respond_to do |format|
-      if @panier.save
-        format.html { redirect_to @panier, notice: 'Recipe was successfully added.' }
-        format.json { render :show, status: :created, location: @panier }
+      if @panier.recipes << @recipe 
+        format.html { redirect_to recipes_url, notice: 'Recipe was successfully added to panier.' }
+        format.json { render :recipes_url, status: :ok}
       else
-        format.html { render :new }
-        format.json { render json: @panier.errors, status: :unprocessable_entity }
+        format.html { render :index }
+        format.json { render json: @recipe.errors, status: :unprocessable_entity } 
+      end
+    end
+  end
+
+  def remove_from_panier
+    respond_to do |format|
+      if @panier.recipes.delete(@recipe)
+        format.html { redirect_to recipes_url, notice: 'Recipe was successfully removed.' }
+        format.json { render :recipes_url, status: :ok}
+      else
+        format.html { render :index }
+        format.json { render json: @recipe.errors, status: :unprocessable_entity } 
       end
     end
   end
