@@ -11,11 +11,12 @@
       %tr
         %td = recipe.title
         %td = recipe.short_desc
-        %td= link_to 'Delete', panier, method: :delete, data: { confirm: 'Are you sure?' }
+        %td = recipe_cost(recipe)
+        %td= link_to 'Delete', @panier, method: :delete, data: { confirm: 'Are you sure?' }
 %br/
+%h4 Total Cost
+= panier_cost(@panier)
 %br/
-%p= link_to 'New Panier', new_panier_path
-
 
 = link_to 'Edit', edit_panier_path(@panier)
 |

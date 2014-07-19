@@ -14,7 +14,7 @@
     = ingredient.product.name
 %p
   %strong Cost:
-  = @cost
+  = recipe_cost(@recipe)
 
 
 = link_to 'Edit', edit_recipe_path(@recipe)
